@@ -55,3 +55,5 @@ end
 
 
 gem "database_cleaner-active_record", "~> 2.2"
+
+gem "aasm", "~> 5.5"
