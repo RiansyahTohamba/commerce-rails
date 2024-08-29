@@ -13,37 +13,26 @@ user has not completed the payment
     "partnerOrderId": "REF-8888",
     "partnerOrderAmount": "72000000",
     "orderStatus": "PENDING",
-    "orderStatusDesc": "payment pending",
-    "paymentEntryUrl": "https://test-pay.akulaku.com/KKCbiAy01OqHNz2gco23e",
-    "metadata": "",
     "createTime": "2021-09-15T12:10:00.753Z"
 }
 
 # PAID	
 payment is successful
-
 {
     "orderId": "1461906891936366594",
     "partnerOrderId": "REF-8888",
     "partnerOrderAmount": "72000000",
     "orderStatus": "PAID",
-    "orderStatusDesc": "payment completed",
-    "paymentEntryUrl": "https://test-pay.akulaku.com/KKCbiAy01OqHNz2gco23e",
-    "metadata": "",
     "createTime": "2021-09-15T12:10:00.753Z"
 }
 
 # CANCELED	
 payment canceled
-
 {
     "orderId": "1461906891936366594",
     "partnerOrderId": "REF-8888",
     "partnerOrderAmount": "72000000",
     "orderStatus": "CANCELED",
-    "orderStatusDesc": "payment canceled",
-    "paymentEntryUrl": "https://test-pay.akulaku.com/KKCbiAy01OqHNz2gco23e",
-    "metadata": "",
     "createTime": "2021-09-15T12:10:00.753Z",
     "reason": {
         "code": "CreditBalanceNotEnough",
