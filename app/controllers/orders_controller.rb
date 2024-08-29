@@ -1,50 +1,39 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: %i[ show edit update destroy ]
+  before_action :set_order, only: %i[ show ]
 
   # GET /orders
   def index
+    # list order untuk halaman list bagi admin 
     @orders = Order.all
   end
 
   # GET /orders/1
   def show
+    # list order untuk halaman detail bagi admin
   end
 
   # GET /orders/new
+  # STATE order disini belum dicatat
   def new
+    # form untuk checkout page
     @order = Order.new
   end
 
-  # GET /orders/1/edit
-  def edit
-  end
 
   # POST /orders
+  # STATE order disini sudah menjadi PENDING
   def create
     @order = Order.new(order_params)
 
-    if @order.save
+    if @order.checkout
       redirect_to @order, notice: "Order was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /orders/1
-  def update
-    if @order.update(order_params)
-      redirect_to @order, notice: "Order was successfully updated.", status: :see_other
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /orders/1
-  def destroy
-    @order.destroy!
-    redirect_to orders_url, notice: "Order was successfully destroyed.", status: :see_other
-  end
-
+  # state machine yang lain disini
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
@@ -53,6 +42,6 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.require(:order).permit(:user_id, :status, :total_price)
+      params.require(:order).permit(:user_id, :total_price)
     end
 end
