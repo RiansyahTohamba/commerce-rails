@@ -1,14 +1,19 @@
 FactoryBot.define do
   factory :line_item do
-    association :item 
     association :cart 
-    association :order 
+    association :order
 
-    trait :single_item do
-      quantity { 1 }
+    # after(:build) do |line_item|
+    #   line_item.total_price
+    # end
+
+    trait :line_sholat do
+      association :item, :sholat
+      quantity { 2 }
     end
 
-    trait :three_items do
+    trait :line_pressman do
+      association :item, :pressman
       quantity { 3 }
     end
   end
