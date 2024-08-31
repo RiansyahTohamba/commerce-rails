@@ -63,3 +63,5 @@ gem "importmap", "~> 0.1.0"
 gem "importmap-rails", "~> 2.0"
 
 gem "devise", "~> 4.9"
+
+gem "faker", "~> 3.4"
