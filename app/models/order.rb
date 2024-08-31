@@ -3,6 +3,8 @@ class Order < ApplicationRecord
   include AASM
   has_many :line_items
   
+  attr_writer :discount_percentage
+
   def checkout
     l_it = LineItem.new
     od.status = 'pending'
@@ -10,7 +12,6 @@ class Order < ApplicationRecord
     od.line_items << l_it
     od.saved!
   end
-
   def process_payment
     ActiveRecord::Base.transaction do
       line_items.each do |line|
@@ -21,14 +22,21 @@ class Order < ApplicationRecord
     end
   end
 
-  def total_price
-    line_items.to_a.sum(&:total_price)
+  def total_price(shipping_cost: 0)
+    total = line_items.to_a.sum(&:total_price)
+    total = total + shipping_cost if shipping_cost != 0
+    total
   end
   
-  # def total_price(item_cost,chosen_carrier,chosen_city)
-  #   # shp_address = User.find_by(id: params(user_id), option_adr:params(chosen_address))
+  # def total_price
+  #   line_items.to_a.sum do |item|
+  #     if item.product.discount_percentage
+  #       item.quantity * item.product.price * ((100 - item.product.discount_percentage) / 100.0)
+  #     else
+  #       item.quantity * item.product.price
+  #     end
+  #   end
   # end
-
   aasm column: 'status' do
     state :pending, initial: true                  
     state :paid, :shipped, :completed, :canceled, :expired
