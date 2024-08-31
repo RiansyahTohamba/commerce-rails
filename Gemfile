@@ -57,3 +57,9 @@ end
 gem "database_cleaner-active_record", "~> 2.2"
 
 gem "aasm", "~> 5.5"
+
+gem "importmap", "~> 0.1.0"
+
+gem "importmap-rails", "~> 2.0"
+
+gem "devise", "~> 4.9"

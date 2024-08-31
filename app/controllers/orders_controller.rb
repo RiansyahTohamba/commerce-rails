@@ -6,7 +6,13 @@ class OrdersController < ApplicationController
     # list order untuk halaman list bagi admin 
     @orders = Order.all
   end
-
+  
+  def calculate_price
+    address = Address.find(params[:address_id])
+    total_price = Order.calculate_total_price(params[:courier], address)
+    
+    render json: { total_price: total_price }
+  end
   # GET /orders/1
   def show
     # list order untuk halaman detail bagi admin
