@@ -8,6 +8,9 @@ Bundler.require(*Rails.groups)
 
 module CommerceRails
   class Application < Rails::Application
+    config.generators do |g|
+      g.test_framework nil
+    end
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 
