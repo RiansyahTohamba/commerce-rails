@@ -2,7 +2,7 @@
 class Order < ApplicationRecord
   include AASM
   has_many :line_items
-  
+  has_one :shipping  
   attr_writer :discount_percentage
 
   def checkout
@@ -12,6 +12,7 @@ class Order < ApplicationRecord
     od.line_items << l_it
     od.saved!
   end
+
   def process_payment
     ActiveRecord::Base.transaction do
       line_items.each do |line|
@@ -24,8 +25,8 @@ class Order < ApplicationRecord
 
   def total_price(shipping_cost: 0)
     total = line_items.to_a.sum(&:total_price)
-    total = total + shipping_cost if shipping_cost != 0
-    total
+    shipping_cost = shipping.calculate_shipping_cost(shipping.city_to)
+    line_items_total + shipping_cost
   end
   
   # def total_price
